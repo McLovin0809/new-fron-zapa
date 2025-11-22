@@ -1,7 +1,6 @@
 import axios from 'axios';
 
 const BASE_URL = 'https://backend-zapa.onrender.com/api/productos'; 
-// 👆 Ajusta la URL según tu despliegue (Render, Railway, etc.)
 
 class ProductosService {
     getAllProductos() {
