@@ -1,12 +1,11 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import Forms from '../components/templates/Forms';
-import { generarMensaje } from '../utils/GenerarMensaje';
-import UsuarioService from "../services/UsuarioService";
-import '../style/pages/login.css'
+import Forms from "../../components/templates/Forms";
+import { generarMensaje } from '../../utils/GenerarMensaje';
+import UsuarioService from "../../services/UsuarioService";
+import '../../style/pages/login.css'
 
 const Login = () => {
-
     const [form, setForm] = useState({ email: "", clave: "" });
     const [loading, setLoading] = useState(false);
     const navigate = useNavigate();
@@ -26,19 +25,32 @@ const Login = () => {
 
         try {
             const response = await UsuarioService.login(form);
-            
-            // guardamos el usuario en localStorage
-            localStorage.setItem("user", JSON.stringify(response.data));
-            
-            generarMensaje('¡Bienvenido!', 'success');
+            const { token, nombre, rol } = response.data;
 
+            // GUARDAR EN LOCALSTORAGE (mejorado)
+            localStorage.setItem('token', token);
+            localStorage.setItem('user', JSON.stringify({ nombre, rol, email: form.email }));
+
+            // MENSAJE DE BIENVENIDA PERSONALIZADO
+            generarMensaje(`¡Bienvenido ${nombre}!`, 'success');
+
+            // REDIRECCIÓN SEGÚN ROL (mejorado)
             setTimeout(() => {
-                navigate('/dashboard');
-            }, 800);
+                if (rol.id === 2 || rol.id === 3) {
+                    navigate('/admin/dashboard');
+                } else if (rol.id === 5) {
+                    navigate('/dashboard');
+                } else {
+                    navigate('/dashboard'); // Ruta por defecto
+                }
+            }, 1500);
 
         } catch (error) {
             const msg = error.response?.data?.message || 'Error al iniciar sesión';
             generarMensaje(msg, 'error');
+            
+            // Limpiar formulario en caso de error
+            setForm({ email: "", clave: "" });
         } finally {
             setLoading(false);
         }
@@ -95,6 +107,20 @@ const Login = () => {
                     content: (
                         <Link to="/CreateUser" className="login-link">
                             Crear usuario
+                        </Link>
+                    ),
+                    variant: "p",
+                    className: "login-text",
+                },
+            ],
+        },
+        {
+            type: "text",
+            text: [
+                {
+                    content: (
+                        <Link to="/forgot-password" className="login-link">
+                            ¿Olvidaste tu contraseña?
                         </Link>
                     ),
                     variant: "p",

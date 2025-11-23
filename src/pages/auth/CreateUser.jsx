@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import Forms from '../components/templates/Forms';
-import { generarMensaje } from '../utils/GenerarMensaje';
-import UsuarioService from "../services/UsuarioService";
-import '../style/pages/CreateUser.css'
+import Forms from "../../components/templates/Forms";
+import { generarMensaje } from '../../utils/GenerarMensaje';
+import UsuarioService from "../../services/UsuarioService";
+import '../../style/pages/CreateUser.css'
 
 const CreateUser = () => {
     const [form, setForm] = useState({ nombre: "", correo: "", contrasena: "" });
