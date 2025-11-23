@@ -2,10 +2,12 @@ import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import Forms from '../components/templates/Forms';
 import { generarMensaje } from '../utils/GenerarMensaje';
-import UserService from '../services/UserService';
+import UsuarioService from "../services/UsuarioService";
+import '../style/pages/login.css'
 
 const Login = () => {
-    const [form, setForm] = useState({ correo: "", contrasena: "" });
+
+    const [form, setForm] = useState({ email: "", clave: "" });
     const [loading, setLoading] = useState(false);
     const navigate = useNavigate();
 
@@ -15,7 +17,7 @@ const Login = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        if (!form.correo || !form.contrasena) {
+        if (!form.email || !form.clave) {
             generarMensaje('Completa todos los campos', 'warning');
             return;
         }
@@ -23,8 +25,9 @@ const Login = () => {
         setLoading(true);
 
         try {
-            const response = await UserService.login(form);
+            const response = await UsuarioService.login(form);
             
+            // guardamos el usuario en localStorage
             localStorage.setItem("user", JSON.stringify(response.data));
             
             generarMensaje('¡Bienvenido!', 'success');
@@ -58,8 +61,8 @@ const Login = () => {
                 {
                     type: "email",
                     placeholder: "Correo Electrónico",
-                    name: "correo",
-                    value: form.correo,
+                    name: "email",  
+                    value: form.email,
                     onChange: handleChange,
                     required: true,
                     autoComplete: "off",
@@ -68,8 +71,8 @@ const Login = () => {
                 {
                     type: "password",
                     placeholder: "Contraseña",
-                    name: "contrasena",
-                    value: form.contrasena,
+                    name: "clave",   
+                    value: form.clave,
                     onChange: handleChange,
                     required: true,
                     autoComplete: "current-password",
@@ -90,8 +93,8 @@ const Login = () => {
             text: [
                 {
                     content: (
-                        <Link to="/forgot-password" className="login-link">
-                            ¿Olvidaste tu contraseña?
+                        <Link to="/CreateUser" className="login-link">
+                            Crear usuario
                         </Link>
                     ),
                     variant: "p",

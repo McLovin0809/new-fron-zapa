@@ -1,11 +1,11 @@
-/* pagina de login */
-.login-page {
+/* Página de crear usuario */
+.create-user-page {
     width: 100%;
     min-height: 100vh;
-    background: linear-gradient(135deg, #1a1a1a, #00008b, #ff8c00);
+    background: #000000;
 }
 
-.login-container {
+.create-user-container {
     display: flex;
     min-height: 100vh;
     align-items: center;
@@ -13,7 +13,7 @@
     padding: 16px;
 }
 
-.login-form {
+.create-user-form {
     width: 100%;
     max-width: 400px;
     background: rgba(255, 255, 255, 0.1);
@@ -23,8 +23,8 @@
     box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
 }
 
-/* titulo */
-.login-title {
+/* Título */
+.create-user-title {
     text-align: center;
     font-size: 32px;
     font-weight: 500;
@@ -32,15 +32,15 @@
     margin-bottom: 40px;
 }
 
-/* grupos de inputs */
-.login-inputs {
+/* Grupos de inputs */
+.create-user-inputs {
     display: flex;
     flex-direction: column;
     gap: 32px;
 }
 
-/* inputs individuales */
-.login-input {
+/* Inputs individuales */
+.create-user-input {
     width: 100%;
     background: transparent;
     border: none;
@@ -51,17 +51,17 @@
     transition: border-color 0.3s;
 }
 
-.login-input:focus {
+.create-user-input:focus {
     outline: none;
     border-bottom-color: #6366f1;
 }
 
-.login-input::placeholder {
+.create-user-input::placeholder {
     color: rgba(255, 255, 255, 0.6);
 }
 
-/* boton */
-.login-button {
+/* Botón */
+.create-user-button {
     width: 100%;
     padding: 12px;
     border: none;
@@ -76,27 +76,28 @@
     margin-bottom: 16px;
 }
 
-.login-button:hover:not(.loading) {
+.create-user-button:hover:not(.loading) {
     background: #818cf8;
 }
 
-.login-button.loading {
+.create-user-button.loading {
     background: #9ca3af;
     cursor: not-allowed;
 }
 
 /* Texto y enlaces */
-.login-text {
+.create-user-text {
     text-align: center;
     font-size: 18px;
+    color: white;
 }
 
-.login-link {
+.create-user-link {
     color: #a5b4fc;
     text-decoration: underline;
     transition: color 0.3s;
 }
 
-.login-link:hover {
+.create-user-link:hover {
     color: #c7d2fe;
 }

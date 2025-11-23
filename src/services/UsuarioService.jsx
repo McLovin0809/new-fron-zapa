@@ -47,6 +47,11 @@ class UsuarioService {
     healthCheck() {
         return axios.get(`${BASE_URL}/health`);
     }
+
+    // Login de usuario
+    login({ email, clave }) {
+        return axios.post(`${BASE_URL}/login`, { email, clave });
+    }
 }
 
 export default new UsuarioService();
